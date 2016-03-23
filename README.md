@@ -57,30 +57,9 @@ https://developer.mozilla.org/en-US/docs/Quirks_Mode_and_Standards_Mode
 
 * What's the difference between HTML and XHTML?
 Many pages on the internet contain "bad" HTML.
-// HTML
-<html>
-<head>
-  <title>This is bad HTML</title>
+ HTML
+ XHTML
 
-<body>
-  <h1>Bad HTML
-  <p>This is a paragraph
-</body>
-// XHTML
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-  <title>Title of document</title>
-</head>
-
-<body>
-  some content 
-</body>
-
-</html>
 
 * Are there any problems with serving pages as `application/xhtml+xml`?
 I use content negotiation to switch between application/xhtml+xml and text/html just like you describe, without noticing any problems with search bots. Strictly though, you should take into account the q values in the accept header that indicates the preference of the user agent to each content type. If a user agent prefers to accept text/html but will accept application/xhtml+xml as an alternate, then for greatest safety you should have the page served as text/html.

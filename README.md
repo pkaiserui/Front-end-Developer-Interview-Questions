@@ -37,6 +37,7 @@ This file contains a number of front-end interview questions that can be used wh
 * How many resources will a browser download from a given domain at a time?
   * What are the exceptions?
 * Name 3 ways to decrease page load (perceived or actual load time).
+css asynchronous image loading 
 * If you jumped on a project and they used tabs and you used spaces, what would you do?
 * Describe how you would create a simple slideshow page.
 * If you could master one technology this year, what would it be?
@@ -49,35 +50,107 @@ This file contains a number of front-end interview questions that can be used wh
 #### HTML Questions:
 
 * What does a `doctype` do?
+The doctype declaration should be the very first thing in an HTML document, before the tag. The doctype declaration is not an HTML tag; it is an instruction to the web browser about what version of the markup language the page is written in. The doctype declaration refers to a Document Type Definition (DTD)
+
 * What's the difference between full standards mode, almost standards mode and quirks mode?
+https://developer.mozilla.org/en-US/docs/Quirks_Mode_and_Standards_Mode
+
 * What's the difference between HTML and XHTML?
+Many pages on the internet contain "bad" HTML.
+// HTML
+<html>
+<head>
+  <title>This is bad HTML</title>
+
+<body>
+  <h1>Bad HTML
+  <p>This is a paragraph
+</body>
+// XHTML
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <title>Title of document</title>
+</head>
+
+<body>
+  some content 
+</body>
+
+</html>
+
 * Are there any problems with serving pages as `application/xhtml+xml`?
+I use content negotiation to switch between application/xhtml+xml and text/html just like you describe, without noticing any problems with search bots. Strictly though, you should take into account the q values in the accept header that indicates the preference of the user agent to each content type. If a user agent prefers to accept text/html but will accept application/xhtml+xml as an alternate, then for greatest safety you should have the page served as text/html.
+
 * How do you serve a page with content in multiple languages?
+Always use a language attribute on the html tag to declare the default language of the text in the page. When the page contains content in another language, add a language attribute to an element surrounding that content.
+Use the lang attribute for pages served as HTML, and the xml:lang attribute for pages served as XML. For XHTML 1.x and HTML5 polyglot documents, use both together.
+
 * What kind of things must you be wary of when design or developing for multilingual sites?
+https://www.quora.com/What-kind-of-things-one-should-be-wary-of-when-designing-or-developing-for-multilingual-sites
+
 * What are `data-` attributes good for?
+http://html5doctor.com/html5-custom-data-attributes/
+
 * Consider HTML5 as an open web platform. What are the building blocks of HTML5?
+more semantic text markup
+new form elements
+vedio and audio
+new javascript API
+canvas and SVG
+new communication API
+geolocation API
+web worker API
+new data storage
+
 * Describe the difference between a `cookie`, `sessionStorage` and `localStorage`.
+http://stackoverflow.com/questions/19867599/what-is-the-difference-between-localstorage-sessionstorage-session-and-cookies
+
 * Describe the difference between `<script>`, `<script async>` and `<script defer>`.
+http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html
+
 * Why is it generally a good idea to position CSS `<link>`s between `<head></head>` and JS `<script>`s just before `</body>`? Do you know any exceptions?
+http://stackoverflow.com/questions/436411/where-is-the-best-place-to-put-script-tags-in-html-markup
+
 * What is progressive rendering?
+http://stackoverflow.com/questions/33651166/what-is-progressive-rendering
+
 * Have you used different HTML templating languages before?
+http://codecondo.com/15-javascript-template-engines/
 
 #### CSS Questions:
 
 * What is the difference between classes and IDs in CSS?
+
 * What's the difference between "resetting" and "normalizing" CSS? Which would you choose, and why?
 * Describe Floats and how they work.
 * Describe z-index and how stacking context is formed.
+X Y and Z index. Z is there in the stack an element is
+
 * Describe BFC(Block Formatting Context) and how it works.
+http://www.sitepoint.com/understanding-block-formatting-contexts-in-css/
+
+
 * What are the various clearing techniques and which is appropriate for what context?
 * Explain CSS sprites, and how you would implement them on a page or site.
+http://www.w3schools.com/css/css_image_sprites.asp 
+
 * What are your favourite image replacement techniques and which do you use when?
+http://stackoverflow.com/questions/17258357/whats-with-all-the-image-replacement-techniques
+
 * How would you approach fixing browser-specific styling issues?
 * How do you serve your pages for feature-constrained browsers?
   * What techniques/processes do you use?
 * What are the different ways to visually hide content (and make it available only for screen readers)?
 * Have you ever used a grid system, and if so, what do you prefer?
+bootstrap
+
 * Have you used or implemented media queries or mobile specific layouts/CSS?
+https://www.smashingmagazine.com/2010/07/how-to-use-css3-media-queries-to-create-a-mobile-version-of-your-website/
+
 * Are you familiar with styling SVG?
 * How do you optimize your webpages for print?
 * What are some of the "gotchas" for writing efficient CSS?
@@ -90,7 +163,12 @@ This file contains a number of front-end interview questions that can be used wh
 * What does ```* { box-sizing: border-box; }``` do? What are its advantages?
 * List as many values for the display property that you can remember.
 * What's the difference between inline and inline-block?
+http://dustwell.com/div-span-inline-block.html 
+
 * What's the difference between a relative, fixed, absolute and statically positioned element?
+https://css-tricks.com/absolute-relative-fixed-positioining-how-do-they-differ/
+https://css-tricks.com/absolute-positioning-inside-relative-positioning/
+
 * The 'C' in CSS stands for Cascading.  How is priority determined in assigning styles (a few examples)?  How can you use this system to your advantage?
 * What existing CSS frameworks have you used locally, or in production? How would you change/improve them?
 * Have you played around with the new CSS Flexbox or Grid specs?
@@ -102,29 +180,69 @@ This file contains a number of front-end interview questions that can be used wh
 
 * Explain event delegation
 * Explain how `this` works in JavaScript
+  arr.func(){
+    this.sort()
+  }
 * Explain how prototypal inheritance works
 * What do you think of AMD vs CommonJS?
 * Explain why the following doesn't work as an IIFE: `function foo(){ }();`.
+(function foo(){ console.log("iife") })()
+
   * What needs to be changed to properly make it an IIFE?
 * What's the difference between a variable that is: `null`, `undefined` or undeclared?
   * How would you go about checking for any of these states?
 * What is a closure, and how/why would you use one?
+http://stackoverflow.com/questions/111102/how-do-javascript-closures-work
+
 * What's a typical use case for anonymous functions?
+callbacks
+
 * How do you organize your code? (module pattern, classical inheritance?)
+http://metaduck.com/08-module-pattern-inheritance.html
+
 * What's the difference between host objects and native objects?
+A few examples:
+Native objects: Object (constructor), Date, Math, parseInt, eval, string methods like indexOf and replace, array methods, ...
+Host objects (assuming browser environment): window, document, location, history, XMLHttpRequest, setTimeout, getElementsByTagName, querySelectorAll, ...
+
 * Difference between: `function Person(){}`, `var person = Person()`, and `var person = new Person()`?
 * What's the difference between `.call` and `.apply`?
+Pseudo syntax:
+theFunction.apply(valueForThis, arrayOfArgs)
+theFunction.call(valueForThis, arg1, arg2, ...)
+Sample code:
+function theFunction(name, profession) {
+    console.log("My name is " + name + " and I am a " + profession + ".");
+}
+theFunction("John", "fireman");
+theFunction.apply(undefined, ["Susan", "school teacher"]);
+theFunction.call(undefined, "Claude", "mathematician");
+// My name is John and I am a fireman.
+// My name is Susan and I am a school teacher.
+// My name is Claude and I am a mathematician.
+
 * Explain `Function.prototype.bind`.
 * When would you use `document.write()`?
 * What's the difference between feature detection, feature inference, and using the UA string?
 * Explain Ajax in as much detail as possible.
+http://stackoverflow.com/questions/22963610/ajax-explained-in-detail
+
 * What are the advantages and disadvantages of using Ajax?
 * Explain how JSONP works (and how it's not really Ajax).
+JSONP (as in "JSON with Padding") is a method commonly used to bypass the cross-domain policies in web browsers (you are not allowed to make AJAX requests to a webpage perceived to be on a different server by the browser).
+JSON and JSONP behave differently on both the client and the server. JSONP requests are not dispatched using the XMLHTTPRequest (and the associated browser methods), instead a <script> tag is created, whose source is set to the target URL. This script tag is then added to the DOM (normally the <head>).
+
+
 * Have you ever used JavaScript templating?
   * If so, what libraries have you used?
 * Explain "hoisting".
+http://code.tutsplus.com/tutorials/javascript-hoisting-explained--net-15092
+
 * Describe event bubbling.
+http://javascript.info/tutorial/bubbling-and-capturing
+
 * What's the difference between an "attribute" and a "property"?
+
 * Why is extending built-in JavaScript objects not a good idea?
 * Difference between document load event and document DOMContentLoaded event?
 * What is the difference between `==` and `===`?
